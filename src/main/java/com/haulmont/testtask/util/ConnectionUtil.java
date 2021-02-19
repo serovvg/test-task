@@ -32,7 +32,9 @@ public class ConnectionUtil {
                 Reader reader = new BufferedReader(new FileReader("src/main/resources/scripts/create_tables.sql"));
                 sr.runScript(reader);
                 if (property.getProperty("data.initialized").equals("false")){
-                    reader = new BufferedReader(new FileReader("src/main/resources/scripts/insert_data.sql"));
+                    String charset = "UTF-8";
+                    reader = new BufferedReader(new InputStreamReader(new FileInputStream(
+                            "src/main/resources/scripts/insert_data.sql"), charset));
                     sr.runScript(reader);
 
                     fos = new FileOutputStream("src/main/resources/config.properties");
